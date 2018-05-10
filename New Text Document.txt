@@ -1,0 +1,41 @@
+PackageInfo pinfo = null;
+        try {
+            pinfo = getPackageManager().getPackageInfo("vn.manroid.testversion", 0);
+            int verCode = pinfo.versionCode;
+            String verName = pinfo.versionName;
+            Log.d("version-name","verCode : " + verCode + " =========== " + "verName : " + verName);
+//            List<PackageInfo> packages = getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+//                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                final String appPackageName = "com.ea.game.pvz2_row"; // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+            }
+        },3000);
+
+    }
+
+//=================
+
+
+currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;   
+  and compare it with online version as shown below :
+
+   if (onlineVersion != null && !onlineVersion.isEmpty()) {
+
+    if (Float.valueOf(currentVersion) < Float.valueOf(onlineVersion)) {
+
+     //show dialog
+
+    }
+
+   }

@@ -39,3 +39,25 @@ currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).version
     }
 
    }
+  
+  //======================================================
+  
+  
+  
+  rename file -> zip
+
+move file classes.dex to file-viewsourceAndroid\dex2jar-0.0.9.15\
+
+Enter in command line :
+dex2jar classes.dex
+
+Open file jd-gui in folder file-viewsourceAndroid\jd-gui-windows-1.4.0
+
+
+//-====================
+move file apk to folder file-viewsourceAndroid\apktool
+apktool d test.apk
+
+//command other
+
+unzip test.apk -d test

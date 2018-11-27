@@ -24,7 +24,9 @@ PackageInfo pinfo = null;
 
     }
 
-//=================
+                                // =====================================================//
+                                // =====================================================//
+                                // =====================================================//
 
 
 currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;   
@@ -40,8 +42,9 @@ currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).version
 
    }
   
-  //======================================================
-  
+                                // =====================================================//
+                                // =====================================================//
+                                // =====================================================//
   
   
   rename file -> zip
@@ -61,3 +64,71 @@ apktool d test.apk
 //command other
 
 unzip test.apk -d test
+
+                                // =====================================================//
+                                // =====================================================//
+                                // =====================================================//
+                                |---------------------------------------------------------|
+                                |                                                         |
+                                |================= Set font for whole app ================|
+                                |                                                         |
+                                |                                                         |
+                                |---------------------------------------------------------|
+                                
+public class FontUtils {
+
+    /**
+     * how use FontUtils
+     *  ----------------- activity ------------------
+     *  FontUtils.getInstance()
+     *                 .setFont(getAssets(), "fonts/Oswald-Stencbab.ttf")
+     *                 .build((ViewGroup) this.
+     *                         findViewById(android.R.id.content));
+     *
+     *  ----------------- fragment ------------------
+     *  FontUtils.getInstance()
+     *                 .setFont(getActivity().getAssets(), "fonts/Oswald-Stencbab.ttf")
+     *                 .build((ViewGroup) this.getView());
+     *
+     *  ----------------- adapter ------------------
+     *   convertView = inflater.inflate(R.layout.listitem, null);
+     *   FontUtils.getInstance()
+     *                .setFont(context.getAssets(), "fonts/Oswald-Stencbab.ttf")
+     *                .build((ViewGroup)convertView);
+     *
+     */
+
+
+    private Typeface typeface;
+    private static FontUtils fontChangeCrawler;
+
+    public static FontUtils getInstance(){
+        if (fontChangeCrawler == null){
+            fontChangeCrawler = new FontUtils();
+        }
+        return fontChangeCrawler;
+    }
+
+    public FontUtils() {
+
+    }
+
+    public FontUtils setFont(AssetManager assets, String assetsFontFileName) {
+        typeface = Typeface.createFromAsset(assets, assetsFontFileName);
+        return this;
+    }
+
+    public FontUtils build(ViewGroup viewTree) {
+        View child;
+        for (int i = 0; i < viewTree.getChildCount(); ++i) {
+            child = viewTree.getChildAt(i);
+            if (child instanceof ViewGroup) {
+                build((ViewGroup) child);
+            } else if (child instanceof TextView) {
+                ((TextView) child).setTypeface(typeface);
+            }
+        }
+        return this;
+    }
+}
+

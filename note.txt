@@ -319,3 +319,13 @@ public class ThreadHandlerActivity extends Activity {
     }
 
 }
+
+=============================================== FIREBASE  ===============================================
+
+
+
+keytool -list -v -keystore "C:\Users\Manroid\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+
+keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Manroid\.android\debug.keystore" | "C:\OpenSSL\bin\openssl" sha1 -binary |"C:\OpenSSL\bin\openssl" base64
+
+keytool -list -v -keystore "D:\android\keystore\fastchat_ks.jks" -alias manroid ==> IMPORTANT

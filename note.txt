@@ -329,3 +329,8 @@ keytool -list -v -keystore "C:\Users\Manroid\.android\debug.keystore" -alias and
 keytool -exportcert -alias androiddebugkey -keystore "C:\Users\Manroid\.android\debug.keystore" | "C:\OpenSSL\bin\openssl" sha1 -binary |"C:\OpenSSL\bin\openssl" base64
 
 keytool -list -v -keystore "D:\android\keystore\fastchat_ks.jks" -alias manroid ==> IMPORTANT
+
+Copy the **SHA1** value to your clip board
+like this C4:7F:C6:98:92:1B:E2:F4:38:DE:5E:2B:2F:28:FA:7C:B2:AA:8F:23
+
+and open http://tomeko.net/online_tools/hex_to_base64.php to convert your SHA1 value to base64.

@@ -1,0 +1,333 @@
+?appkey=7c4fe12438a9548b9ab73f39cf41e206
+Hiện lại progress đang kết nối tài khoản facebook
+GET SHA1 từ keystore
+
+D:\NamAnh\GitHub Repository\android-sdk\AndroidStudio 3.0.0\mobGameSDK\build\intermediates\bundles\default\libs\
+
+keytool -list -v -keystore "D:\NamAnh\GitHub Repository\casual-android-sdk\AndroidStudio\gameActivity\keystore" -alias mobgame -storepass mobgame123 -keypass mobgame123
+Error:Execution failed for task ':mobGameSDK:transformClassesAndResourcesWithSyncLibJarsForRelease'.
+Tracking: https://docs.google.com/spreadsheets/d/1tEUPRg97eWuUV2DJMan1Uhl3c2kRhPOaQtGJd6Zf7UM/edit#gid=1678721562
+Trạng thái update: https://docs.google.com/spreadsheets/d/1jZjpLg7VaAd6MOdwqYBN9aXZcyPaaG_98M7w_13WFeo/edit
+NRU/Installs: https://docs.google.com/spreadsheets/d/1hrkU4Ft3OhhXIeI_dFMBUjdXn_a8ode2XlJwfjed3hs/edit#gid=0
+All game stats: 	
+
+https://romannurik.github.io/AndroidAssetStudio/nine-patches.html#&sourceDensity=320&name=example
+
+Tool gen icon android: http://goo.gl/14DrRi
+Các thiết bị phổ biến: https://material.io/devices/
+Tỷ lệ kích thước màn hình: https://hwstats.unity3d.com/mobile/display-android.html
+Tỷ lệ sdk android: https://developer.android.com/about/dashboards/index.html
+
+keytool.exe -exportcert -alias mobgame -keystore D:\NamAnh\GitHub Repository\casual-android-sdk\AndroidStudio\gameActivity\keystore | C:\openssl\bin\openssl sha1 -binary | C:\openssl\bin\bin\openssl base64
+
+I. SIGN APK
+	Chuẩn bị: 	1. File .apk
+				2. File note pass của dự án chứa key alias, pass
+				3. File keystore của dự án
+	Bước 0 (chỉ phải làm khi cần sửa file manifest): 
+				- decode: apktool d tên_file.apk
+				- sửa file
+				- build: apktool b tên_folder
+				- build xong thì file apk nằm trong thư mục dist, mang ra thực hiện bước 2
+	Bước 1: 	- Đổi tên file thành .zip
+				- Xóa folder META
+				- Đổi lại thành .apk
+	Bước 2: 	- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore [tên_file_key.keystore] [tên_apk_viết_vài_chữ_đầu_rồi_ấn_tab.apk] [alias_từ_note]
+				- zipalign -v 4 [tên_apk_viết_vài_chữ_đầu_rồi_ấn_tab.apk] [tên_apk_mới_thêm_signed.apk]
+			jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore
+			jarsigner -verbose -sigalg SHA1withRSA -sigestalg SHA1 -keystore
+			jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore
+			jarsigner -verbose -sigalg SHA1withRSA - digestalg SHA1 -keystore
+II. CÁC TASK TRELLO KIỂM TRA SUBMIT
+	Chuẩn bị:	1. File .apk
+				2. Decode apk: (chọn cách nào cũng được, miễn lấy đủ thông tin)
+					a. apktool d [tên_file_.apk] lấy file manifest
+					b. Xem thông tin file apk trên command: apt dump badging [tên_file.apk]
+					c. Có thể Decode bằng jadx-0.6.1, vào folder bin chạy jadx-gui.bat và quẳng file .apk vào
+	0. Kiểm tra Manifest:
+		+ Package name
+		+ Target
+		+ AppsFlyer
+		+ Tracking Google
+		+ Tracking Mob
+		+ Admob
+		+ Splash
+		+ MainActivity
+		+ Paypal tạm bỏ
+		+ GCM
+		+ Facebook ID
+		
+	1. Dung lượng file APK <95MB, OBB <2GB
+	2. Manifest có debug = true thì báo bỏ
+	3. Manifest Facebook ID: (thường có 3 chỗ)
+			+ android:scheme="fb+id_từ_file_thông_tin_dự_án"
+			+ <provider android:authorities="com.facebook.app.FacebookContentProvider +id_từ_file_thông_tin_dự_án" 
+					android:exported="true" android:name="com.facebook.FacebookContentProvider"/>
+	4. Check code version bằng lệnh, nếu giống bản trên store thì báo nâng version
+	5. Check SDK Version bằng lệnh, không được nhỏ hơn target của build cũ
+	6. Dùng Fiddle hoặc decode để xem có talking data không
+	7. Dùng Fiddle xem có request đến server Trung Quốc, báo đỏ nhiều không, nghi vấn phải báo lại
+	8. Check tên các gói nạp, vào phần nạp trong game, ấn nạp, xem log từng gói nạp, lưu lại tên vào Trello
+			mobAppSDKexecute: command = mobPaymentStartIAP; params = {"product_id":"com.m26vn.coin100"}
+			
+			IAP:com.m26vn.coin001
+				com.m26vn.coin005
+				com.m26vn.coin010
+				com.m26vn.coin025
+				com.m26vn.coin050
+				com.m26vn.coin100
+	9. Check roleID, areaID sau khi tạo chọn nhân vật, không null là được
+			I/MobGameSDK: setUserConfig: area_id=30;role_id=289356404907576448;area_name=Alaska;role_name=
+	10. Check SSL: cài app OpenSSL Scanner, từ 1.0.1r đổ về sau hoặc từ 1.0.2g đổ về sau là được
+	
+	11. Kiểm tra log tracking af_finish_tutorial, af_create_charactor, af_finish_download_resource
+	
+	
+III. Làm việc với đối tác dev Trung Quốc
+	Chuẩn bị:	1. File thông tin dự án
+				2. Tạo file Readme trích thông tin từ file thông tin dự án
+				3. Group skype
+				4. Group QQ
+				5. App trên HockeyApp
+				6. Bảng Trello (khi có bản submit)
+				
+	Hướng dẫn tích hợp SDK dùng doc bản Eclipse cho cả Android Studio và Eclipse:
+		http://doc.funtap.vn/android/getting-started-sdk-android-for-eclipse-draft/
+		(bản chính nhưng ko nên dùng: http://doc.funtap.vn/android/downloads/)
+	
+	
+	
+	
+	
+IV. ANDROID SDK
+	Có tất cả 3 bộ SDK chính như sau:	
+	1 . SDK 2.4.8.EC : Cho eclipse , tức là các dev nào mà ko biết tích hợp hoặc ko chịu tích hợp game = Android Studio , chỉ dùng Eclipse
+	thì gửi bộ này
+	Trên doc.funtap.vn là bộ SDK này
+	
+	2. Bộ SDK cho Android studio . Tất cả các game nào chịu tích hợp = Android Studio thì dùng bộ này .
+	Version hiện tại là 2.4.4.4a.AS
+		compile 'com.mobgame:mobGameSDK:2.4.8'
+	
+	3. Là bộ SDK feature . Bộ SDK feature thì là bộ cho các game có ý định lên game feature, dùng Android Studio để tích hợp
+	Về cách lấy bộ sdk cũng tương tự như bộ Android Studio kia, dùng config trong build.grade
+		compile 'com.mobgame:mobGameSDK:ft2.4.4.2a'
+	
+	Phân biệt bản Feature và bản thường cho Android Studio
+		- không có permission nhạy cảm như đọc thẻ nhớ , truy nhập danh bạ , bla bla
+		- không có paypal
+		- Có sign-up sign in google
+	
+	* Project Demo gửi cho DEV:
+	Pull project từ nhánh tương ứng trên github android-sdk, delete hết module có code, chỉ giữ module GameActivity với config trong build.gradle thôi
+
+	
+V. ĐẶT CODE TRACKING CHƠI XONG HƯỚNG DẪN, DOWNLOAD XONG RESOURCE
+	Put this code when finish download resource at first time
+		final String PREFS_NAME = "Mxx_sharepreference";
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		if (settings.getBoolean("my_first_time_download_resource", true)) {
+		 
+			MobgameSDK.customizeTracking(activity.getApplicationContext(),"af_finish_download_resource",null);
+		 
+			// record the fact that the app has been started at least once
+			Log.d("Mob-Tracking", "Tracking af_finish_download_resource");
+			settings.edit().putBoolean("my_first_time_download_resource", false).commit(); 
+			
+		}
+
+	Put this code when create character:
+		if (settings.getBoolean("my_first_time_create_char", true)) {
+			
+			MobgameSDK.customizeTracking(activity.getApplicationContext(),"af_create_charactor",null);
+			
+			Log.d("Mob-Tracking", "Tracking af_create_charactor");
+			settings.edit().putBoolean("my_first_time_create_char", false).commit(); 
+		}
+			
+	 
+/*	BẢN CŨ
+	Đặt đoạn code này khi user nhấn vào nút tạo nhân vật(tức là đã chơi xong hướng dẫn)
+	try {
+	   AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), “af_create_charactor" , null);
+	  } catch (Exception e) {
+	   // TODO: handle exception
+	   e.printStackTrace();
+	}
+
+
+	Đặt đoạn code này khi user download xong resource lúc vừa vào game. CHÚ Ý CÁI TÊN
+	final String PREFS_NAME = "M40_sharepreference";
+	SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+	if (settings.getBoolean("my_first_time", true)) {
+		//the app is being launched for first time, do something       
+		try {
+		  AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(), “af_finish_download_resource”, null);
+		} catch (Exception e) {
+	   // TODO: handle exception
+		 e.printStackTrace();
+		}
+		// record the fact that the app has been started at least once
+		settings.edit().putBoolean("my_first_time", false).commit(); 
+	}
+*/
+	
+	
+V. CÁCH TEST PUSH NOTIFICATION
+	1. Đăng nhập vào game, demo..., lưu lại RegId trong log:
+		06-01 10:47:44.074 14486-14486/vn.mobgame.demoapp I/MobGameGCMIntentService: regId:APA91bGcNykiM0wy4WKyFssAsPtPwf44DvpphaAcRxzOJT6ScSe1WQKE38iuLwwJbmbS4JPk0jDZDPuAbANIieGyDCQ6wm2aS2dN4Nlk3TnyeBnH53YBrtwzHnRgfByOfsZCTED7oanN
+	2. Kết nối wifi điện thoại với Fiddle
+	3. Mở Fiddle, chọn tab Composer
+	4. Trong tab Parsed của Composer:
+		+ Phương thức POST
+		+ Link: https://gcm-http.googleapis.com/gcm/send
+		+ Điền vào cái ô to to dưới phương thức với link:
+Content-Type: application/json
+Authorization: key=AIzaSyCLw8ilkrU86cT7g7belo41EqgB33XaNu8
+Host: gcm-http.googleapis.com
+Content-Length: 223
+		+ Request Body:
+			m50_cn
+			{       
+			  "registration_ids":["APA91bGcNykiM0wy4WKyFssAsPtPwf44DvpphaAcRxzOJT6ScSe1WQKE38iuLwwJbmbS4JPk0jDZDPuAbANIieGyDCQ6wm2aS2dN4Nlk3TnyeBnH53YBrtwzHnRgfByOfsZCTED7oanN"],
+			  "data": {
+				"message" : "abc2",
+			  } 
+			}
+			
+				"message":"Tesst",
+				"title":"Tesst",
+				"menu-id":2,
+				"sub-id":1,
+				"url":"\/plf\/news\/news\/canh-bao-refund-va-mua-ban-vang-lau"
+
+				"message":"Tesst",
+				"title":"Tesst",
+				"menu-id":2,
+				"sub-id":1,
+				"link":"\/plf\/news\/news\/canh-bao-refund-va-mua-ban-vang-lau",
+				"url":"link ảnh"
+			Trong đó registration_ids là RegId lấy từ log
+			Nội dung "data" có thể thêm các trường tùy mục đích, ví dụ thêm "id" : 1 dưới dòng "message"....
+			
+{       
+"registration_ids":["APA91bEB2ObTiZcQXJRNfULYx7GTvxIYwLcp7KZf3V6c60x_wGxCq7F-9GAfgRDhQ7PhQbN9cY7FtENqeBEZC12cf3hgrSvT6Xda7XYB32AiyT36JPPKWOj95pgpyKQfnbfgHQz3PDx_"],
+"data": {
+"message":"Tesst",
+"title":"Tesst",
+"menu-id":2,
+"sub-id":1,
+"link":"\/plf\/news\/news\/canh-bao-refund-va-mua-ban-vang-lau",
+"url":"https://cdn.smobgame.com/592d66d94cdcf.png"
+} 
+}
+
+			
+			m58vn: APA91bGDwh834WGCMTOCZfTrcJvB0-8dKpXFwV2qc2WekS2uejpsmp2UxDa2caRoRIIX-vOmHbAzOKmTWf5j4b-xftHOmYJzXYgcIMjMTDG9_hI4zIyi2ttXAYJIOfEEpcQnABCt2Vgu
+			{       
+"registration_ids":["APA91bGDwh834WGCMTOCZfTrcJvB0-8dKpXFwV2qc2WekS2uejpsmp2UxDa2caRoRIIX-vOmHbAzOKmTWf5j4b-xftHOmYJzXYgcIMjMTDG9_hI4zIyi2ttXAYJIOfEEpcQnABCt2Vgu"],
+"data": {
+"message" : "abc2",
+} 
+}
+
+
+{       
+"registration_ids":["APA91bEIGqyMNKonLzxEYMPZ_MirZfr5_GY1yW2X6sqLxi0fdLUK_nLYOFb4keVBFFjHVIjZOA3azwRAnC45oSrJq3VJqfcYIsM9BxgM08pAuQkdSzYHlpRV1ZSWX4CPV4yC7ns8zIs_"],
+"data": {
+"message":"Xác nhận đây KHÔNG phải là bài viết về",
+"id":"2",
+"title":"Demo-Android",
+"link":"\/plf\/news\/news\/canh-bao-refund-va-mua-ban-vang-lau",
+"url":"http://cdn.smobgame.com/59756ccf67d05.png",
+"timer":{"start":1500829200,"end":1500915600,"id":"18518"}
+} 
+}
+
+FCM
+https://fcm.googleapis.com/fcm/send
+
+Content-Type: application/json
+Authorization: key=AAAAeGvecx4:APA91bEpGkabIb5O3V4BiXKMXjASM4ISSKRZlkQjK64MMTtT8R7I-wVKpT4PZZ3yxw5H47Ou-Hzm46Qr11TC5vRuU-D-EmD2ITn5GVh3n2JFxFTxFHUJ1uASnmaj4cSUOg_C2npnJLcs
+Host: fcm.googleapis.com
+Content-Length: 342
+
+
+{ "data": {
+    "title": "Demo Firebase Cloud Messaging",
+    "message": "this is message to nokia 6",
+    "id": "1234",
+    "url":"https://i.imgur.com/YKscw0b.jpg"
+  },
+  "to" : "dh4Ulb9VKqA:APA91bGsu3R1jKJbDbeGbndYbGbElrFMPLmowSI7vz8HLMUv45Yu4kv2X0_wpemnbK38sZC_npYKCmVpj1kA__Hwnj1g4W1F7Vhs4ptXleBJWcosThCK0hFduSdokrEgpTxzDSRRwlyA"
+}
+
+VI. BUG KHI TÍCH HỢP
+1. Không nhận được push noti
+	- Kiểm tra regid, nếu không có thì tích hợp sai trong manifest (permisstion C2D, GCMIntent, service, receiver)
+	- Restart máy
+	- Xung đột push notification, kiểm tra manifest
+2. Không load dc dữ liệu file OBB: bỏ quyền đọc ghi file thì 1 số máy lỗi, phải restart mới chạy được
+	
+		
+VII. TEST POPUP
+tester
+test123mob
+http://mars.smobgame.com/login
+
+VI. BUG KHI TÍCH HỢP
+	1. Không nhận được push noti
+		- Kiểm tra regid, nếu không có thì tích hợp sai trong manifest (permisstion C2D, GCMIntent, service, receiver)
+		- Restart máy
+		- Xung đột push notification, kiểm tra manifest
+	2. Không load dc dữ liệu file OBB: bỏ quyền đọc ghi file thì 1 số máy lỗi, phải restart mới chạy được
+		
+		
+VII. TEST POPUP
+tester
+test123mob
+http://mars.smobgame.com/login
+
+VIII. FABRIC
+khaitq.ptit@gmail.com/android123
+funtapm50cn@gmail.com/12345670
+funtapm11@gmail.com/12345m11
+funtapm66@gmail.com/12345m66
+
+install plugin fabric => restart android studio
+đăng nhập
+chọn project chính next next
+crash s
+
+IX. INVITE SCAN REFUND
+https://docs.google.com/spreadsheets/d/12Pq64Eo6lVQb0HCBKp6DxzMp5s1ntuUEpuF4FsbY8e4/edit?ts=58994609#gid=0
+1. Vào playstore/ develope account/ user permission/ invite:
+	- scanpurchases@gmail.com - view + financial + reply
+	- ccpaygg@mobgame.vn - view + finalcial
+2. Developerment tool/ API Access => chọn view in console => ấn tên project => copy chuỗi project id gửi vào mail điền vào excel. vd api-4699595736168444291-105618
+3. Sau khi anh Trung xử lý sẽ điền lại 1 mail dài ngoằng vào excel. Quay lại user permission, invite mail dài ngoằng anh trung update - view + finalcial + reply
+
+List id acc test
+
+akitatest18		8758312
+akitatest19		8758320
+akitatest20		8758332
+
+XX. Debug View
+
+	adb shell setprop debug.firebase.analytics.app <package_name>
+	
+	C:\Users\namanh\AppData\Local\Android\Sdk\platform-tools
+	
+	kH@i!@123
+
+ 461098885975 AIzaSyCLw8ilkrU86cT7g7belo41EqgB33XaNu8
+ 300830567303 AIzaSyBO7-7iiJAhph0kVbJ9wp4N95t1PBRVVUU
+ 
+bintray.user=khaitq7
+bintray.gpg.password=123456789a@
+bintray.apikey=473dbbb77363fc879890ebe6452467af0b6ada82
+
+
+private String fcmSenderId = "517205816094";// Sender Id project Demo
+//    private String fcmSenderId = "577522348312";//SenderId Project SDK IP

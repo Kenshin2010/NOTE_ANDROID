@@ -1,3 +1,13 @@
+
+//=========================================
+Tools gia lap android:
+
+bluestack
+leapdroid
+nox
+genymotion
+emulator(android studio)
+//=========================================
 PackageInfo pinfo = null;
         try {
             pinfo = getPackageManager().getPackageInfo("vn.manroid.testversion", 0);

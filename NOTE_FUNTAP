@@ -331,3 +331,6 @@ bintray.apikey=473dbbb77363fc879890ebe6452467af0b6ada82
 
 private String fcmSenderId = "517205816094";// Sender Id project Demo
 //    private String fcmSenderId = "577522348312";//SenderId Project SDK IP
+
+//link test popup
+http://mars.smobgame.com/tool/test/popup_format

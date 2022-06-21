@@ -1,0 +1,80 @@
+https://medium.com/@mmbialas/50-android-studio-tips-tricks-resources-you-should-be-familiar-with-as-an-android-developer-af86e7cf56d2
+
+Shortcuts and helpful commands
+1. The best and the most helpful command is Search for command:
+cmd + shift + a (Windows / Linux: ctrl + shift + a).
+
+Let’s say you want to close current tab and you don’t know how. You just type: close and you’ll get a proper shortcut / command.
+
+2. Choose from the last copy / pastes (manage your clipboard):
+cmd + shift + v (Windows / Linux: ctrl + shift + v).
+By default there are 5 last copy/paste items.
+
+
+The depth of the Clipboard stack is configured in the Limits section on the Editor page of the Settings dialog box. When the specified number is exceeded, the oldest entry is removed from the list. [Cutting, Copying and Pasting in IntelliJ IDEA]
+
+3. Enable multicursor feature: control + g (alt + j for Windows / Linux).
+
+
+A detailed article about this feature is provided by 
+Bartek Lipinski
+ on Medium. Highly recommended!
+
+4. Open a class: cmd + o (Windows / Linux: ctrl + n).
+
+5. Open any file: cmd + shift + o (Windows / Linux: ctrl + shift + n).
+
+6. Open symbol: cmd + option + o (Windows / Linux: alt + shift + n).
+
+7. Go to implementation: cmd + option + b (Windows / Linux:
+ctrl + alt + b).
+Let’s say you have an interface. By clicking on the interface’s name and then clicking the Go to implementation shortcut, you will be redirected to classes which implement that interface.
+
+8. Go to declaration: cmd + b (Windows / Linux: ctrl + b).
+It allows you to quickly check and go to a declaration of a class, method or a variable.
+
+9. Go to type declaration: control + shift + b (Windows / Linux:
+ctrl + shift + b).
+Let’s say you defined:
+
+Employee employee = new Employee(“Michal”);
+
+When your caret is on employee and you click the shortcut, you will be redirected to the Employee class.
+
+10. Go to super: cmd + u (Windows / Linux: ctrl + u).
+For instance, you override some method. When your caret in on the method’s name and you click Go to super shortcut, you will be redirected to the parent method.
+
+11. Move between tabs: cmd + shift + [ (move left) or cmd + shift + ] (move right) (Windows / Linux: alt + ← / →).
+
+12. Move between Design / Text tabs in layout’s view:
+control + shift + ← / → (Windows / Linux: alt + shift + ← / →).
+
+13. Close a current tab: cmd + w (Windows / Linux: ctrl + F4).
+
+14. Hide all windows: cmd + shift + F12 (Windows / Linux:
+ctrl + shift + F12).
+
+15. Minimize Android Studio instance: cmd + m (Windows / Linux:
+ctrl + m).
+
+16. Format your code: cmd + option + l (Windows / Linux:
+ctrl + alt + l).
+
+17. Auto-indent lines: control + option + i (Windows / Linux:
+ctrl + alt + i).
+
+18. Implement methods: control + i (Windows / Linux: ctrl + i).
+Let’s say you implement an interface. Then, you can quickly import all methods provided by that interface, just by clicking this shortcut.
+
+19. Smart code completion (filters the list of methods and variables by expected type): control + shift + space (Windows / Linux: ctrl + shift + space).
+
+20. Find: cmd + f (Windows / Linux: ctrl + f).
+
+21. Find and replace: cmd + r (Windows / Linux: ctrl + r).
+
+22. Move hardcoded strings to resources: option + return (Windows / Linux: alt + enter). The shortcut must be used when a caret is on a text. Check the gif below:
+
+
+If you use that shortcut globally, the IDE will do Project quick fix (show intention actions and quick fixes).
+
+23. Build and run: control + r (Windows / Linux: shift + F10).

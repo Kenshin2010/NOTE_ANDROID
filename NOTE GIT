@@ -1,3 +1,8 @@
 NOTE GIT UPDATE 
 
 git remote set-url origin https://<githubtoken>@github.com/<username>/<repositoryname>.git
+
+
+// clone git set lại user name
+git clone https://username@github.com/username/repository.git
+https://stackoverflow.com/questions/10054318/how-do-i-provide-a-username-and-password-when-running-git-clone-gitremote-git

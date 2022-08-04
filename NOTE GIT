@@ -6,3 +6,11 @@ git remote set-url origin https://<githubtoken>@github.com/<username>/<repositor
 // clone git set lại user name
 git clone https://username@github.com/username/repository.git
 https://stackoverflow.com/questions/10054318/how-do-i-provide-a-username-and-password-when-running-git-clone-gitremote-git
+
+
+// Fix không fetch hoặc ko push, pull ..
+In your project go to .git/config and add after username :password
+before : https://username@bitbucket.org/repo.git
+afetr : https://username:password@bitbucket.org/repo.git
+
+https://stackoverflow.com/questions/20923193/bitbucket-windows-and-fatal-could-not-read-password-for

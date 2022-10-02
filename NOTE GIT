@@ -14,3 +14,5 @@ before : https://username@bitbucket.org/repo.git
 afetr : https://username:password@bitbucket.org/repo.git
 
 https://stackoverflow.com/questions/20923193/bitbucket-windows-and-fatal-could-not-read-password-for
+
+// Nếu gặp lần đầu không push được code khi tạo project trên github, thì xem lại hướng dẫn ở ngoài,có ảnh chụp màn hình các bước

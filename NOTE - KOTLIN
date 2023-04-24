@@ -40,3 +40,6 @@ https://blog.appcircle.io/article/transforming-kotlin-collections-functions-with
 
 // Chú ý cách hủy coroutines trong link dưới đây
 https://proandroiddev.com/part-2-coroutine-cancellation-and-structured-concurrency-2dbc6583c07d
+
+// sử dụng operator method, gọi đối tượng như 1 hàm
+https://proandroiddev.com/increasing-readability-using-operator-conventions-in-kotlin-d518541f4c0a

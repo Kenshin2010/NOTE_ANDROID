@@ -52,3 +52,19 @@ https://github.com/dinhpv38/guide-to-kotlin
 để làm biến callback
 
 // dùng takeif thay cho if
+
+
+// dùng inline cho các trường hợp như dưới đây cho gọn code
+inline fun EditText.onTextChanged(crossinline eventHandler: (String) -> Unit) {
+    this.addTextChangedListener(object: TextWatcher {
+        override fun afterTextChanged(s: Editable) {
+             eventHandler(s.toString())
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {                
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+    })
+}

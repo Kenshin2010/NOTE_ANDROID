@@ -47,3 +47,8 @@ https://proandroiddev.com/increasing-readability-using-operator-conventions-in-k
 
 // guide to kotlin full
 https://github.com/dinhpv38/guide-to-kotlin
+
+// ko khai báo class interface như trước ở trong adapter nữa , dùng typealias ItemClickListener = (Item) -> Unit
+để làm biến callback
+
+// dùng takeif thay cho if

@@ -95,3 +95,7 @@ fun main(args: Array<String>) {
     val p = Structure()
     p createPyramid 4       // p.createPyramid(4)
 }
+
+
+// Cách viết generic trong kotlin in. out. where
+https://adventures92.medium.com/kotlin-generics-explaind-mastering-in-out-and-where-804ee1642627

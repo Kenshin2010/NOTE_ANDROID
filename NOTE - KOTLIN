@@ -111,3 +111,6 @@ https://viblo.asia/p/hieu-mot-cach-don-gian-ve-livedata-android-architecture-com
 
 // 1 số điều cần biết về room
 https://viblo.asia/p/7-pro-tips-for-room-bWrZn06p5xw
+
+// Migrate live data -> StateFlow
+https://medium.com/androiddevelopers/migrating-from-livedata-to-kotlins-flow-379292f419fb

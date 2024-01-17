@@ -1,6 +1,7 @@
 Tool capture url:
 https://www.analytics-debugger.com/tools/ios-android-debugger/
 
+========================================================================
 
 Sign apk
 
